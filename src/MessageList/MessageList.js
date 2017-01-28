@@ -1,20 +1,29 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Message from '../Message/Message';
-import { container } from './MessageList.css';
+import React, { Component } from 'react';
+import { fetchMessages } from '../ApiHelper/ApiHelper'
+import Message from '../Message/Message'
+import { container } from './MessageList.css'
 
-const MessageList = ({ messages }) => (
-  <ul className={container}>
-    { messages.map(currentMessage => <Message key={currentMessage.id} message={currentMessage} />) }
-  </ul>
-);
+class MessageList extends Component {
+  constructor(props) {
+    super(props)
 
-MessageList.propTypes = {
-  messages: PropTypes.arrayOf(PropTypes.object),
-};
+    this.state = { messages: [] }
+  }
 
-MessageList.defaultProps = {
-  messages: [],
-};
+  componentWillMount() {
+    return fetchMessages()
+      .then(messages => this.setState({ messages }))
+  }
+
+  render() {
+    const { messages } = this.state
+
+    return (
+      <ul className={ container }>
+        { messages.reverse().map(message => <Message key={message.id} message={message} />) }
+      </ul>
+    )
+  }
+}
 
 export default MessageList;
