@@ -23,22 +23,22 @@ describe('App component', () => {
     ApiHelper.fetchMessages.restore();
   })
 
-  it('should contain MessageList component with messages', () => {
-    ApiHelper.fetchMessages.returns(Promise.resolve(fakeMessages))
-    const wrapper = shallow(<App />)
+  describe('on render', () => {
+    it('should render MessageList', () => {
+      const wrapper = shallow(<App />)
 
-    wrapper.setState({messages : fakeMessages})
+      const messageComponent = wrapper.find(MessageList)
+      expect(messageComponent).to.have.length(1)
+      expect(messageComponent.at(0).prop("messages")).to.be.instanceof(Array);
+    })
 
-    const messageList = wrapper.find(MessageList);
+    it('should render InputMessage', () => {
+      const wrapper = shallow(<App />)
 
-    expect(messageList.prop("messages")).to.deep.equal(fakeMessages)
-  })
-
-  it('should render InputMessage', () => {
-    ApiHelper.fetchMessages.returns(Promise.resolve(fakeMessages))
-    const wrapper = shallow(<App />)
-
-    expect(wrapper.find(InputMessage)).to.have.length(1)
+      const InputMessageComponent = wrapper.find(InputMessage)
+      expect(InputMessageComponent).to.have.length(1)
+      expect(InputMessageComponent.at(0).prop("onSubmit")).to.be.instanceof(Function);
+    })
   })
 
   describe('on component will mount', () => {

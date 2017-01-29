@@ -14,27 +14,36 @@ const messages = [
 ]
 
 describe('MessageList component', () => {
-  describe('on first render', () => {
-    beforeEach(() => (
-        sinon.stub(ApiHelper, "fetchMessages")
-    ))
+  describe('on render', () => {
+    it('should render 1 message with right props', () => {
+        const messages = [{
+            id: "1",
+            content: "message1Content",
+            author: "author"
+        }];
 
-    afterEach(() => {
-        ApiHelper.fetchMessages.restore();
+        const wrapper = shallow(<MessageList messages={messages}/>);
+        expect(wrapper.find(Message)).to.have.length(1);
+        expect(wrapper.find(Message).at(0).prop("message")).to.deep.equal({
+            id: "1",
+            content: "message1Content",
+            author: "author"
+        });
     })
 
-    it('should render Message components with data from fetchMessages response', (done) => {
-      ApiHelper.fetchMessages.returns(Promise.resolve(messages))
-      const wrapper = shallow(<MessageList />)
+    it('should render 2 messages', () => {
+        const messages = [{
+            id: "1",
+            content: "message1Content",
+            author: "author"
+        }, {
+            id: "2",
+            content: "message2Content",
+            author: "author"
+        }];
 
-      setTimeout(function() {
-        expect(ApiHelper.fetchMessages.calledOnce).to.be.true
-
-        expect(wrapper.find(Message)).to.have.length(2)
-        expect(wrapper.contains(<Message message={fakeMessage1} />)).to.be.true
-        expect(wrapper.contains(<Message message={fakeMessage2} />)).to.be.true
-        done()
-      }, 10)
+        const wrapper = shallow(<MessageList messages={messages}/>);
+        expect(wrapper.find(Message)).to.have.length(2);
     })
   })
 })

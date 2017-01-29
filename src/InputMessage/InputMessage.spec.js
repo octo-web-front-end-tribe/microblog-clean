@@ -67,6 +67,24 @@ describe('InputMessage component', () => {
         sinon.assert.calledWith(spyApiHelperPostMessage, { author: 'John Smith', content: 'My new message' });
         expect(wrapper.state('inputValue')).to.equal('');
       });
+
+      it('should invoke prop onEnter', (done) => {
+        // given
+        let onSubmitStub = sinon.stub();
+        const wrapper = shallow(<InputMessage onSubmit={onSubmitStub}/>)
+        wrapper.setState({inputValue : 'My new message'})
+        const input = wrapper.find('input')
+
+        // when
+        input.simulate('keyPress', {key : 'Enter'})
+
+        // then
+        setTimeout(() => {
+          expect(onSubmitStub.callCount).to.equal(1)
+          expect(wrapper.state('inputValue')).to.equal('')
+          done()
+        }, 10)
+      })
     });
   });
 });

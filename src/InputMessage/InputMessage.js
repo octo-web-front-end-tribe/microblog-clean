@@ -14,10 +14,10 @@ class InputMessage extends Component {
         author:'John Smith',
         content: this.state.inputValue,
       })
-      .then(() => {
-        this.props.onEnter()
-      })
-      this.setState({inputValue: ''})
+        .then(() => {
+          this.props.onSubmit()
+          this.setState({inputValue : ''})
+        })
     }
   }
 
