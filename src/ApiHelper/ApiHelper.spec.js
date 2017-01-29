@@ -29,4 +29,28 @@ describe('ApiHelper component', () => {
         })
     })
   })
+
+  describe('postMessage', () => {
+    describe('when the query is successful', () => {
+      beforeEach(() => (
+        fetchMock.post(getMessageRoute, {})
+      ))
+
+      afterEach(fetchMock.restore)
+
+      it('should post a message', () => {
+        const body = {
+          author: 'toto',
+          content: 'kikoo'
+        }
+
+        return postMessage(body)
+          .then(() => {
+            expect(fetchMock).route(getMessageRoute).to.have.been.calledOnce
+            expect(fetchMock).to.have.been.calledWith(JSON.stringify(body))
+          })
+      })
+    })
+  });
+
 })
