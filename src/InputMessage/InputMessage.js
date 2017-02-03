@@ -11,10 +11,13 @@ class InputMessage extends Component {
   onEnter({ key }) {
     if (key === 'Enter') {
       postMessage({
-        author: 'John Smith',
+        author:'John Smith',
         content: this.state.inputValue,
-      });
-      this.setState({ inputValue: '' });
+      })
+      .then(() => {
+        this.props.onEnter()
+      })
+      this.setState({inputValue: ''})
     }
   }
 
