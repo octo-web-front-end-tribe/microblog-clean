@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { postMessage } from '../ApiHelper/ApiHelper'
-import { container, input } from './InputMessage.css'
+import React, {Component} from 'react';
+import {postMessage} from '../ApiHelper/ApiHelper'
+import {container, input} from './InputMessage.css'
 
 class InputMessage extends Component {
   constructor(props) {
@@ -8,12 +8,15 @@ class InputMessage extends Component {
     this.state = {inputValue: ''}
   }
 
-  onEnter({ key }) {
+  onEnter({key}) {
     if (key === 'Enter') {
       postMessage({
-        author:'John Smith',
+        author: 'John Smith',
         content: this.state.inputValue
       })
+        .then(() => {
+          this.props.onEnter()
+        })
       this.setState({inputValue: ''})
     }
   }

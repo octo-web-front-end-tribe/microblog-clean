@@ -1,6 +1,6 @@
 import React from 'react'
-import { expect } from 'chai'
-import { shallow } from 'enzyme'
+import {expect} from 'chai'
+import {shallow} from 'enzyme'
 import sinon from 'sinon'
 import InputMessage from './InputMessage'
 import * as ApiHelper from '../ApiHelper/ApiHelper'
@@ -32,7 +32,7 @@ describe('InputMessage component', () => {
     let spyApiHelperPostMessage
 
     beforeEach(() => {
-      spyApiHelperPostMessage = sinon.stub(ApiHelper, 'postMessage')
+      spyApiHelperPostMessage = sinon.stub(ApiHelper, 'postMessage').returns(Promise.resolve())
     })
 
     afterEach(() => {
@@ -53,7 +53,7 @@ describe('InputMessage component', () => {
       })
     })
 
-    describe('with a key different than enter', () => {
+    describe('with enter', () => {
       it('should call ApiHelper.postMessage with value', () => {
         // given
         const wrapper = shallow(<InputMessage />)
@@ -66,8 +66,25 @@ describe('InputMessage component', () => {
 
         // then
         sinon.assert.calledOnce(spyApiHelperPostMessage)
-        sinon.assert.calledWith(spyApiHelperPostMessage, {author:'John Smith', content:'My new message'})
+        sinon.assert.calledWith(spyApiHelperPostMessage, {author: 'John Smith', content: 'My new message'})
         expect(wrapper.state('inputValue')).to.equal('')
+      })
+
+      it('should invoke prop onEnter', (done) => {
+        // given
+        let onEnterStub = sinon.stub();
+        const wrapper = shallow(<InputMessage onEnter={onEnterStub}/>)
+        wrapper.setState({inputValue: 'My new message'})
+        const input = wrapper.find('input')
+
+        // when
+        input.simulate('keyPress', {key: 'Enter'})
+
+        // then
+        setTimeout(() => {
+          expect(onEnterStub.callCount).to.equal(1)
+          done()
+        }, 10)
       })
     })
   })
