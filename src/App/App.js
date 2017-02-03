@@ -1,7 +1,13 @@
 import React from 'react';
+import MessageList from '../MessageList/MessageList'
+import {container, messageBox} from './App.css'
 
 const App = () => (
-  <div>Hello world</div>
+  <div className={container}>
+    <div className={messageBox}>
+      <MessageList />
+    </div>
+  </div>
 );
 
 export default App;
