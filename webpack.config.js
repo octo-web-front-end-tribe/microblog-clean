@@ -2,54 +2,54 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const config = {
-  context: __dirname,
+module.exports = {
+  context : __dirname,
 
-  entry: [
+  entry : [
     'webpack-dev-server/client?http://127.0.0.1:8080',
     './src/index.js',
   ],
 
-  output: {
-    filename: 'bundle.js',
-    path: path.join(__dirname, 'public'),
+  output : {
+    filename : 'bundle.js',
+    path : path.join(__dirname, 'public'),
   },
 
-  devtool: 'source-map',
+  devtool : 'source-map',
 
-  resolve: {
-    extensions: ['', '.js'],
+  devServer : {
+    contentBase : './public',
   },
 
-  devServer: {
-    contentBase: './public',
-  },
-
-  module: {
-    loaders: [
+  module : {
+    rules : [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel',
+        test : /\.js$/,
+        exclude : [/node_modules/],
+        use : [{
+          loader : 'babel-loader',
+          options : {presets : ['es2015', 'react']},
+        }],
       },
-
       {
-        test: /\.css$/,
-        exclude: /node_modules/,
-        loaders: [
-          'style-loader',
-          'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
-        ],
+        test : /\.css$/,
+        exclude : /node_modules/,
+        use : ['style-loader', {
+          loader : 'css-loader',
+          options : {
+            modules : true,
+            importLoaders : 1,
+            localIdentName : '[path][name]__[local]--[hash:base64:5]',
+          },
+        }],
       },
     ],
   },
 
-  plugins: [
+  plugins : [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template : './src/index.html',
     }),
   ],
 };
-
-module.exports = config;

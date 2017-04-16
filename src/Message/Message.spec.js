@@ -1,12 +1,12 @@
 import React from 'react'
-import { expect } from 'chai'
-import { shallow } from 'enzyme'
+import {expect} from 'chai'
+import {shallow} from 'enzyme'
 import Message from './Message'
 
 const fakeMessage = {
   id : 'abcd',
-  content: 'ceci est un message',
-  author: 'ceci est un auteur'
+  content : 'ceci est un message',
+  author : 'ceci est un auteur'
 }
 
 describe('Message component', () => {

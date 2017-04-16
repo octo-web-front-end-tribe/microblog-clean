@@ -9,15 +9,15 @@ import * as ApiHelper from '../ApiHelper/ApiHelper'
 let stubApiHelper
 
 const message1 = {
-  id: 'abcd',
-  author: 'abcd',
-  content: 'abcd',
+  id : 'abcd',
+  author : 'abcd',
+  content : 'abcd',
 }
 
 const message2 = {
-  id: 'efgh',
-  author: 'efgh',
-  content: 'efgh',
+  id : 'efgh',
+  author : 'efgh',
+  content : 'efgh',
 }
 
 const fakeMessages = [message1, message2]

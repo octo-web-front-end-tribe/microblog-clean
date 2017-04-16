@@ -1,21 +1,21 @@
 import React, {Component} from 'react';
 import Message from '../Message/Message'
-import { fetchMessages } from '../ApiHelper/ApiHelper'
+import {fetchMessages} from '../ApiHelper/ApiHelper'
 
 class MessageList extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {messages: []}
+    this.state = {messages : []}
   }
 
   componentWillMount() {
     return fetchMessages()
-      .then(responseMessages => this.setState({ messages: responseMessages }))
+      .then(responseMessages => this.setState({messages : responseMessages}))
   }
 
   render() {
-    const { messages } = this.state
+    const {messages} = this.state
 
     return (
       <div>

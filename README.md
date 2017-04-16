@@ -1,27 +1,14 @@
-# Coding session novembre
+# coding-session-react
 
-## Installation
+**Welcome on board**
+## getting started
+1. use [Node.js] v≥6
+2. install all dependencies thanks to ```yarn```
+3. start dev server ```yarn start```
 
-Dépendances :
- * [Node.js] v≥6.
-
-```sh
-yarn install
-```
-
-## Lancer le site
-
-L'application est une application [React] dans le dossier `src`.
-
-```
-yarn start
-```
-
-## Lancer les tests
-
-```
-yarn test
-```
-
-[Node.js]: https://nodejs.org/en/
-[React]: https://facebook.github.io/react/
+## available tasks
+### dev
+- tdd ```yarn test-watch```
+- lint ```yarn lint```
+- test and lint ```yarn test```
+- build locally ```yarn build```

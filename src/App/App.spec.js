@@ -1,6 +1,6 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { expect } from 'chai';
+import {shallow} from 'enzyme';
+import {expect} from 'chai';
 import App from './App';
 import MessageList from '../MessageList/MessageList'
 
