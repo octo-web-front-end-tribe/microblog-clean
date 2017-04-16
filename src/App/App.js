@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import InputMessage from '../InputMessage/InputMessage'
 import MessageList from '../MessageList/MessageList';
 import {container, messageBox} from './App.css'
-import { fetchMessages } from '../ApiHelper/ApiHelper'
+import {fetchMessages} from '../ApiHelper/ApiHelper'
 
 class App extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {messages: []}
+    this.state = {messages : []}
   }
 
   componentWillMount() {
@@ -17,7 +17,10 @@ class App extends Component {
 
   refresh() {
     return fetchMessages()
-      .then(messages => this.setState({messages}))
+      .then(messages => {
+        this.setState({messages})
+        return messages
+      })
   }
 
   render() {

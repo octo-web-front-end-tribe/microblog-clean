@@ -13,7 +13,7 @@ export function postMessage(body) {
 
 export function postMessage(body) {
   return fetch('https://skool-microblog.herokuapp.com/messages', {
-    method: 'POST',
-    body: JSON.stringify(body)
+    method : 'POST',
+    body : JSON.stringify(body)
   })
 }
