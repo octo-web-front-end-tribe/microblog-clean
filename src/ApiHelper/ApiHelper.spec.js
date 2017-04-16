@@ -7,7 +7,7 @@ const { expect } = chai;
 chai.use(chaiFetchMock);
 
 const messages = [
-  { id: 'abcd', content: 'fakeContent', author: 'fakeAuthor' }
+  {id : 'abcd', content : 'fakeContent', author : 'fakeAuthor'}
 ]
 
 describe('ApiHelper component', () => {
