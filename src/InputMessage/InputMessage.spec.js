@@ -70,7 +70,7 @@ describe('InputMessage component', () => {
 
       it('should invoke prop onEnter', (done) => {
         // given
-        let onSubmitStub = sinon.stub();
+        const onSubmitStub = sinon.stub();
         const wrapper = shallow(<InputMessage onSubmit={onSubmitStub}/>)
         wrapper.setState({inputValue : 'My new message'})
         const input = wrapper.find('input')

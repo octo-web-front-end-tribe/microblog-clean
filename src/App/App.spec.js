@@ -24,6 +24,10 @@ describe('App component', () => {
   })
 
   describe('on render', () => {
+    beforeEach(() => {
+      ApiHelper.fetchMessages.returns(Promise.resolve([]))
+    })
+
     it('should render MessageList', () => {
       const wrapper = shallow(<App />)
 

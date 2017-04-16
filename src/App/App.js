@@ -27,7 +27,7 @@ class App extends Component {
     return (
       <div className={container}>
         <div className={messageBox}>
-          <InputMessage onEnter={() => this.refresh()}/>
+          <InputMessage onSubmit={() => this.refresh()}/>
           <MessageList messages={this.state.messages}/>
         </div>
       </div>
