@@ -6,7 +6,7 @@ chai.use(chaiFetchMock)
 import {fetchMessages} from './ApiHelper'
 
 const messages = [
-  { id: 'abcd', content: 'fakeContent', author: 'fakeAuthor' }
+  {id : 'abcd', content : 'fakeContent', author : 'fakeAuthor'}
 ]
 
 describe('ApiHelper component', () => {
