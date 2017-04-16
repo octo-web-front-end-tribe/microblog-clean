@@ -40,14 +40,17 @@ describe('ApiHelper component', () => {
 
       it('should post a message', () => {
         const body = {
-          author: 'toto',
-          content: 'kikoo'
+          author : 'toto',
+          content : 'kikoo'
         }
 
         return postMessage(body)
           .then(() => {
             expect(fetchMock).route(getMessageRoute).to.have.been.calledOnce
-            expect(fetchMock).to.have.been.calledWith(JSON.stringify(body))
+            expect(fetchMock).route(getMessageRoute).to.have.been.called.with.args([getMessageRoute, {
+              body : JSON.stringify(body),
+              method : "POST"
+            }])
           })
       })
     })

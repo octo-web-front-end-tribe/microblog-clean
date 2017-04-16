@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {fetchMessages} from '../ApiHelper/ApiHelper'
 import Message from '../Message/Message'
 import {container} from './MessageList.css'
 

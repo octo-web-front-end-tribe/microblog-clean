@@ -21,7 +21,7 @@ describe('InputMessage component', () => {
       const input = wrapper.find('input')
 
       // when
-      input.simulate('change', {target: {value: 'toto'}})
+      input.simulate('change', {target : {value : 'toto'}})
 
       // then
       expect(wrapper.state('inputValue')).to.equal('toto')
@@ -46,7 +46,7 @@ describe('InputMessage component', () => {
         const notEnter = 0
 
         // when
-        input.simulate('keyPress', {keyCode: 'notEnter'})
+        input.simulate('keyPress', {keyCode : 'notEnter'})
 
         // then
         sinon.assert.notCalled(spyApiHelperPostMessage)
@@ -57,16 +57,16 @@ describe('InputMessage component', () => {
       it('should call ApiHelper.postMessage with value', () => {
         // given
         const wrapper = shallow(<InputMessage />)
-        wrapper.setState({inputValue: 'My new message'})
+        wrapper.setState({inputValue : 'My new message'})
         const input = wrapper.find('input')
         const enter = 13
 
         // when
-        input.simulate('keyPress', {key: 'Enter'})
+        input.simulate('keyPress', {key : 'Enter'})
 
         // then
         sinon.assert.calledOnce(spyApiHelperPostMessage)
-        sinon.assert.calledWith(spyApiHelperPostMessage, {author: 'John Smith', content: 'My new message'})
+        sinon.assert.calledWith(spyApiHelperPostMessage, {author : 'John Smith', content : 'My new message'})
         expect(wrapper.state('inputValue')).to.equal('')
       })
 
@@ -74,11 +74,11 @@ describe('InputMessage component', () => {
         // given
         let onEnterStub = sinon.stub();
         const wrapper = shallow(<InputMessage onEnter={onEnterStub}/>)
-        wrapper.setState({inputValue: 'My new message'})
+        wrapper.setState({inputValue : 'My new message'})
         const input = wrapper.find('input')
 
         // when
-        input.simulate('keyPress', {key: 'Enter'})
+        input.simulate('keyPress', {key : 'Enter'})
 
         // then
         setTimeout(() => {

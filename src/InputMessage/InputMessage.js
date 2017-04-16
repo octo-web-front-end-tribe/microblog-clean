@@ -5,24 +5,24 @@ import {container, input} from './InputMessage.css'
 class InputMessage extends Component {
   constructor(props) {
     super(props)
-    this.state = {inputValue: ''}
+    this.state = {inputValue : ''}
   }
 
   onEnter({key}) {
     if (key === 'Enter') {
       postMessage({
-        author: 'John Smith',
-        content: this.state.inputValue
+        author : 'John Smith',
+        content : this.state.inputValue
       })
         .then(() => {
           this.props.onEnter()
         })
-      this.setState({inputValue: ''})
+      this.setState({inputValue : ''})
     }
   }
 
   onChange({target: {value}}) {
-    this.setState({inputValue: value})
+    this.setState({inputValue : value})
   }
 
   render() {
