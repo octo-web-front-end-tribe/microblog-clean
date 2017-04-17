@@ -57,6 +57,8 @@ describe('InputMessage component', () => {
         // given
         const wrapper = shallow(<InputMessage />);
         wrapper.setState({ inputValue: 'My new message' });
+        window.localStorage.setItem('name', 'John');
+
         const input = wrapper.find('input');
 
         // when
@@ -65,7 +67,7 @@ describe('InputMessage component', () => {
         // then
         expect(spyApiHelperPostMessage.callCount).to.equal(1);
         /* eslint no-unused-expressions : 0 */
-        expect(spyApiHelperPostMessage.calledWith({ author: 'John Smith', content: 'My new message' })).to.be.true;
+        expect(spyApiHelperPostMessage.calledWith({ author: 'John', content: 'My new message' })).to.be.true;
       });
 
       it('should invoke prop onEnter', (done) => {
