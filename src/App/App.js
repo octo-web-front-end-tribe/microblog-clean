@@ -1,37 +1,37 @@
-import React, {Component} from 'react';
-import InputMessage from '../InputMessage/InputMessage'
+import React, { Component } from 'react';
+import InputMessage from '../InputMessage/InputMessage';
 import MessageList from '../MessageList/MessageList';
-import {container, messageBox} from './App.css'
-import {fetchMessages} from '../ApiHelper/ApiHelper'
+import { container, messageBox } from './App.css';
+import { fetchMessages } from '../ApiHelper/ApiHelper';
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.state = {messages : []}
+    this.state = { messages: [] };
   }
 
   componentWillMount() {
-    return this.refresh()
+    return this.refresh();
   }
 
   refresh() {
     return fetchMessages()
-      .then(messages => {
-        this.setState({messages})
-        return messages
-      })
+      .then((messages) => {
+        this.setState({ messages });
+        return messages;
+      });
   }
 
   render() {
     return (
       <div className={container}>
         <div className={messageBox}>
-          <InputMessage onSubmit={() => this.refresh()}/>
-          <MessageList messages={this.state.messages}/>
+          <InputMessage onSubmit={() => this.refresh()} />
+          <MessageList messages={this.state.messages} />
         </div>
       </div>
-    )
+    );
   }
 }
 

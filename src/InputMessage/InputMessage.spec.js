@@ -48,7 +48,7 @@ describe('InputMessage component', () => {
         input.simulate('keyPress', { key: 'notEnter' });
 
         // then
-        sinon.assert.notCalled(spyApiHelperPostMessage);
+        expect(spyApiHelperPostMessage.callCount).to.equal(0);
       });
     });
 
@@ -63,28 +63,28 @@ describe('InputMessage component', () => {
         input.simulate('keyPress', { key: 'Enter' });
 
         // then
-        sinon.assert.calledOnce(spyApiHelperPostMessage);
-        sinon.assert.calledWith(spyApiHelperPostMessage, { author: 'John Smith', content: 'My new message' });
-        expect(wrapper.state('inputValue')).to.equal('');
+        expect(spyApiHelperPostMessage.callCount).to.equal(1);
+        /* eslint no-unused-expressions : 0 */
+        expect(spyApiHelperPostMessage.calledWith({ author: 'John Smith', content: 'My new message' })).to.be.true;
       });
 
       it('should invoke prop onEnter', (done) => {
         // given
         const onSubmitStub = sinon.stub();
-        const wrapper = shallow(<InputMessage onSubmit={onSubmitStub}/>)
-        wrapper.setState({inputValue : 'My new message'})
-        const input = wrapper.find('input')
+        const wrapper = shallow(<InputMessage onSubmit={onSubmitStub} />);
+        wrapper.setState({ inputValue: 'My new message' });
+        const input = wrapper.find('input');
 
         // when
-        input.simulate('keyPress', {key : 'Enter'})
+        input.simulate('keyPress', { key: 'Enter' });
 
         // then
         setTimeout(() => {
-          expect(onSubmitStub.callCount).to.equal(1)
-          expect(wrapper.state('inputValue')).to.equal('')
-          done()
-        }, 10)
-      })
+          expect(onSubmitStub.callCount).to.equal(1);
+          expect(wrapper.state('inputValue')).to.equal('');
+          done();
+        }, 10);
+      });
     });
   });
 });

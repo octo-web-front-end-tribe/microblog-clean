@@ -10,10 +10,3 @@ export function postMessage(body) {
     body: JSON.stringify(body),
   });
 }
-
-export function postMessage(body) {
-  return fetch('https://skool-microblog.herokuapp.com/messages', {
-    method : 'POST',
-    body : JSON.stringify(body)
-  })
-}

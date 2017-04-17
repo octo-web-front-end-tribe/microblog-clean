@@ -20,14 +20,12 @@ describe('ApiHelper component', () => {
 
     afterEach(fetchMock.restore);
 
-    it('should return a response with the expected messages', () => {
-      return fetchMessages()
+    it('should return a response with the expected messages', () => fetchMessages()
         .then((response) => {
           /* eslint no-unused-expressions:0 */
           expect(fetchMock).route(getMessageRoute).to.have.been.calledOnce;
           expect(response).to.deep.equal(messages);
-        });
-    });
+        }));
   });
 
   describe('postMessage', () => {
@@ -51,8 +49,7 @@ describe('ApiHelper component', () => {
               [
                 getMessageRoute,
                 { body: JSON.stringify(body), method: 'POST' },
-              ],
-            );
+              ]);
           });
       });
     });
