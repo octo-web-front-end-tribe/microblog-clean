@@ -3,6 +3,6 @@ import ReactDOM from 'react-dom';
 import App from './App/App';
 
 ReactDOM.render(
-  <App name={'OCTO Maroc'} />,
+  <App />,
   document.getElementById('root')
 );
