@@ -1,34 +1,46 @@
-import React from 'react'
-import {expect} from 'chai'
-import {shallow} from 'enzyme'
-import MessageList from './MessageList'
-import Message from '../Message/Message'
+import React from 'react';
+import { expect } from 'chai';
+import { shallow } from 'enzyme';
+import sinon from 'sinon';
+import MessageList from './MessageList';
+import Message from '../Message/Message';
+import * as ApiHelper from '../ApiHelper/ApiHelper';
 
-const fakeMessage1 = {id : '123', content : 'fakeContent1', author : 'fakeAuthor1'}
-const fakeMessage2 = {id : '456', content : 'fakeContent2', author : 'fakeAuthor2'}
-const messages = [
-  fakeMessage1,
-  fakeMessage2
-]
+const message1 = {
+  id: 'abcd',
+  author: 'abcd',
+  content: 'abcd',
+};
+
+const message2 = {
+  id: 'efgh',
+  author: 'efgh',
+  content: 'efgh',
+};
+
+const fakeMessages = [message1, message2];
 
 describe('MessageList component', () => {
-  describe('on first render', () => {
-    describe('with defined props', () => {
-      it('should render Message components with data from fetchMessages response', () => {
-        const wrapper = shallow(<MessageList messages={messages}/>)
+  describe('on render', () => {
+    beforeEach(() => {
+      sinon.stub(ApiHelper, 'fetchMessages');
+    });
 
-        expect(wrapper.find(Message)).to.have.length(2)
+    afterEach(() => {
+      ApiHelper.fetchMessages.restore();
+    });
+
+    it('should call fetchMessages from ApiHelper', (done) => {
+      ApiHelper.fetchMessages.returns(Promise.resolve(fakeMessages));
+
+      const wrapper = shallow(<MessageList />);
+
+      setTimeout(() => {
+        expect(wrapper.find(Message)).to.have.length(2);
         expect(wrapper.find(Message).at(0).prop('message')).to.deep.equal(message2);
         expect(wrapper.find(Message).at(1).prop('message')).to.deep.equal(message1);
-      })
-    })
-
-    describe('without props', () => {
-      it('should render nothing', () => {
-        const wrapper = shallow(<MessageList/>)
-
-        expect(wrapper.find(Message)).to.have.length(0)
-      })
-    })
-  })
-})
+        done();
+      }, 10);
+    });
+  });
+});

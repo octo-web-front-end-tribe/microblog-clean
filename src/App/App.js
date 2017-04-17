@@ -1,38 +1,15 @@
-import React, {Component} from 'react';
-import InputMessage from '../InputMessage/InputMessage';
+import React from 'react';
 import MessageList from '../MessageList/MessageList';
-import {container, messageBox} from './App.css';
-import { fetchMessages } from '../ApiHelper/ApiHelper';
+import InputMessage from '../InputMessage/InputMessage';
+import { container, messageBox } from './App.css';
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {messages : []}
-  }
-
-  componentWillMount() {
-    return this.refresh()
-  }
-
-  refresh() {
-    return fetchMessages()
-      .then(messages => {
-        this.setState({messages})
-        return messages
-      })
-  }
-
-  render() {
-    return (
-      <div className={container}>
-        <div className={messageBox}>
-          <InputMessage onEnter={() => this.refresh()}/>
-          <MessageList messages={this.state.messages}/>
-        </div>
-      </div>
-    )
-  }
-}
+const App = () => (
+  <div className={container}>
+    <div className={messageBox}>
+      <InputMessage />
+      <MessageList />
+    </div>
+  </div>
+);
 
 export default App;
