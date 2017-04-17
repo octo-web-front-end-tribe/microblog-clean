@@ -3,19 +3,22 @@ import {expect} from 'chai'
 import {shallow} from 'enzyme'
 import Message from './Message'
 
-const fakeMessage = {
-  id : 'abcd',
-  content : 'ceci est un message',
-  author : 'ceci est un auteur'
-}
-
 describe('Message component', () => {
-  describe('on render', () => {
-    it('should contain author and content', () => {
-      const wrapper = shallow(<Message message={ fakeMessage }/>)
+  const fakeMessage = {
+    id : 'abcd',
+    content : 'ceci est un message',
+    author : 'ceci est un auteur'
+  };
 
-      expect(wrapper.text()).to.contain(fakeMessage.content)
-      expect(wrapper.text()).to.contain(fakeMessage.author)
-    })
-  })
+  it('Should render author message', () => {
+    const wrapper = shallow(<Message message={ fakeMessage }/>);
+
+    expect(wrapper.find('.author').text()).to.equal(fakeMessage.author);
+  });
+
+  it('Should render content message', () => {
+    const wrapper = shallow(<Message message={ fakeMessage }/>);
+
+    expect(wrapper.find('.content').text()).to.equal(fakeMessage.content);
+  });
 })

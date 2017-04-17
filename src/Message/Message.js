@@ -1,19 +1,24 @@
-import React, {Component} from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
 import {item, author, content} from './Message.css'
 
-class Message extends Component {
-  render() {
-    return (
-      <li className={ item }>
-        <div className={ author}>
-          { this.props.message.author }
-        </div>
-        <div className={ content }>
-          { this.props.message.content }
-        </div>
-      </li>
-    )
-  }
-}
+const Message = ({message}) => (
+  <li className={ item }>
+    <div className={[author, 'author'].join(' ')}>{ message.author }</div>
+    <div className={[content, 'content'].join(' ')}>{ message.content }</div>
+  </li>
+);
+
+Message.propTypes = {
+  message : PropTypes.shape({
+    id : PropTypes.string,
+    author : PropTypes.string,
+    content : PropTypes.string,
+  }),
+};
+
+Message.defaultProps = {
+  message : {},
+};
 
 export default Message

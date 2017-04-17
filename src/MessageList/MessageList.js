@@ -1,28 +1,20 @@
-import React, {Component} from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
 import Message from '../Message/Message'
-import {fetchMessages} from '../ApiHelper/ApiHelper'
+import {container} from './MessageList.css'
 
-class MessageList extends Component {
-  constructor(props) {
-    super(props)
+const MessageList = ({messages}) => (
+  <ul className={container}>
+    { messages.map(currentMessage => <Message key={currentMessage.id} message={currentMessage}/>) }
+  </ul>
+);
 
-    this.state = {messages : []}
-  }
+MessageList.propTypes = {
+  messages : PropTypes.arrayOf(PropTypes.object),
+};
 
-  componentWillMount() {
-    return fetchMessages()
-      .then(responseMessages => this.setState({messages : responseMessages}))
-  }
-
-  render() {
-    const {messages} = this.state
-
-    return (
-      <div>
-        { messages.map(currentMessage => <Message key={currentMessage.id} message={currentMessage}/>) }
-      </div>
-    )
-  }
-}
+MessageList.defaultProps = {
+  messages : [],
+};
 
 export default MessageList
