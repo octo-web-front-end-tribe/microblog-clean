@@ -6,19 +6,19 @@ import { container } from './Login.css';
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { inputValue: '', isAuthenticated: false };
+    this.state = { isAuthenticated: false };
   }
 
   onEnter({ key }) {
     if (key === 'Enter') {
-      this.props.onAuthenticateAction(this.state.inputValue);
-      window.localStorage.setItem('name', this.state.inputValue);
-      this.setState({ inputValue: '', isAuthenticated: true });
+      this.props.onAuthenticateAction(this.props.login);
+      window.localStorage.setItem('name', this.props.login);
+      this.setState({ isAuthenticated: true });
     }
   }
 
   onChange({ target: { value } }) {
-    this.setState({ inputValue: value });
+    this.props.onUpdateLoginAction(value);
   }
 
   render() {
@@ -26,7 +26,7 @@ class Login extends Component {
       return (
         <div className={container}>
           <input
-            value={this.state.inputValue}
+            value={this.props.login}
             onChange={event => this.onChange(event)}
             onKeyPress={event => this.onEnter(event)}
           />
@@ -39,6 +39,12 @@ class Login extends Component {
 
 Login.propTypes = {
   onAuthenticateAction: PropTypes.func.isRequired,
+  onUpdateLoginAction: PropTypes.func.isRequired,
+  login: PropTypes.string,
+};
+
+Login.defaultProps = {
+  login: '',
 };
 
 export default Login;

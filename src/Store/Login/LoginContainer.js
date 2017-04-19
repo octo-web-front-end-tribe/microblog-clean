@@ -5,7 +5,7 @@ import { authenticate, updateLogin } from './LoginActions';
 
 export const mapDispatchToProps = {
   onAuthenticateAction: authenticate,
-  onUpdateLoginAction : updateLogin,
+  onUpdateLoginAction: updateLogin,
 };
 
 export default connect(null, mapDispatchToProps)(Login);

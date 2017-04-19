@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { authenticate, updateLogin} from './LoginActions';
+import { authenticate, updateLogin } from './LoginActions';
 
 import loginReducer from './LoginReducer';
 
