@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import authenticate from './LoginActions';
+import { authenticate, updateLogin} from './LoginActions';
 
 import loginReducer from './LoginReducer';
 
@@ -28,10 +28,19 @@ describe('LoginReducer', () => {
     });
   });
 
-  describe('When an handled action is given', () => {
+  describe('When an authenticate action is given', () => {
     it('Should return a new updated state', () => {
       const currentState = { test: 'value' };
       const loginAction = authenticate('testLogin');
+      const state = loginReducer(currentState, loginAction);
+      expect(state).to.have.property('login').that.equals('testLogin');
+    });
+  });
+
+  describe('When an updateLogin action is given', () => {
+    it('Should return a new updated state', () => {
+      const currentState = { test: 'value' };
+      const loginAction = updateLogin('testLogin');
       const state = loginReducer(currentState, loginAction);
       expect(state).to.have.property('login').that.equals('testLogin');
     });

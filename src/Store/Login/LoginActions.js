@@ -1,8 +1,16 @@
 export const LOGIN = 'LOGIN';
+export const UPDATE_LOGIN = 'UPDATE_LOGIN';
 
-export default function authenticate(login) {
+export function authenticate(login) {
   return {
     type: LOGIN,
     login,
+  };
+}
+
+export function updateLogin(newLogin) {
+  return {
+    type: UPDATE_LOGIN,
+    newLogin,
   };
 }
