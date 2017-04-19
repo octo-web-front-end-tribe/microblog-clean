@@ -11,6 +11,7 @@ export const mapDispatchToProps = {
 export function mapStateToProps(state) {
   return {
     login: state.login,
+    isAuthenticated: !!state.isAuthenticated,
   };
 }
 

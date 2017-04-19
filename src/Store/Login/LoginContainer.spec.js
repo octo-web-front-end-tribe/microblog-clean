@@ -6,6 +6,10 @@ describe('LoginContainer', () => {
   describe('mapStateToProps', () => {
     it('Should map correctly', () => {
       const state = { login: 'login' };
+      expect(mapStateToProps(state)).to.deep.equal({ login: 'login', isAuthenticated: false });
+    });
+    it('Should map correctly', () => {
+      const state = { login: 'login', isAuthenticated: true };
       expect(mapStateToProps(state)).to.deep.equal(state);
     });
   });
