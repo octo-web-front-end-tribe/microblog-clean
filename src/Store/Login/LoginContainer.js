@@ -1,11 +1,16 @@
 import { connect } from 'react-redux';
 
 import Login from '../../Login/Login';
-import { authenticate, updateLogin } from './LoginActions';
+import {
+  authenticate,
+  updateLogin,
+  updateLocalStorage,
+} from './LoginActions';
 
 export const mapDispatchToProps = {
   onAuthenticateAction: authenticate,
   onUpdateLoginAction: updateLogin,
+  updateLocalStorageAction: updateLocalStorage,
 };
 
 export function mapStateToProps(state) {

@@ -1,4 +1,4 @@
-import { LOGIN, UPDATE_LOGIN } from './LoginActions';
+import { LOGIN, UPDATE_LOGIN, UPDATE_LOCAL_STORAGE } from './LoginActions';
 
 export default function loginReducer(state = {}, action) {
   if (action) {
@@ -10,6 +10,9 @@ export default function loginReducer(state = {}, action) {
     }
     if (action.type === UPDATE_LOGIN) {
       return Object.assign({}, state, { login: action.newLogin });
+    }
+    if (action.type === UPDATE_LOCAL_STORAGE) {
+      window.localStorage.setItem('name', action.login);
     }
   }
   return state;

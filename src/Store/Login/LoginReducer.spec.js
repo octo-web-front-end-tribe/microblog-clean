@@ -1,5 +1,9 @@
 import { expect } from 'chai';
-import { authenticate, updateLogin } from './LoginActions';
+import {
+  authenticate,
+  updateLogin,
+  updateLocalStorage,
+} from './LoginActions';
 
 import loginReducer from './LoginReducer';
 
@@ -44,6 +48,27 @@ describe('LoginReducer', () => {
       const loginAction = updateLogin('testLogin');
       const state = loginReducer(currentState, loginAction);
       expect(state).to.have.property('login').that.equals('testLogin');
+    });
+  });
+
+  describe('When an updateLocalStorage action is given', () => {
+    const currentState = { test: 'value' };
+    const loginAction = updateLocalStorage('testLogin');
+
+    describe('Local storage', () => {
+      beforeEach(() => {
+        window.localStorage.clear();
+      });
+
+      it('Should save the name in the local storage', () => {
+        loginReducer(currentState, loginAction);
+        expect(window.localStorage.getItem('name')).to.equal('testLogin');
+      });
+    });
+
+    it('Should return the state untouched', () => {
+      const state = loginReducer(currentState, loginAction);
+      expect(state).to.deep.equal(state);
     });
   });
 });

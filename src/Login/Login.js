@@ -7,7 +7,7 @@ class Login extends Component {
   onEnter({ key }) {
     if (key === 'Enter') {
       this.props.onAuthenticateAction(this.props.login);
-      window.localStorage.setItem('name', this.props.login);
+      this.props.updateLocalStorageAction(this.props.login);
     }
   }
 
@@ -34,6 +34,7 @@ class Login extends Component {
 Login.propTypes = {
   onAuthenticateAction: PropTypes.func.isRequired,
   onUpdateLoginAction: PropTypes.func.isRequired,
+  updateLocalStorageAction: PropTypes.func.isRequired,
   login: PropTypes.string,
   isAuthenticated: PropTypes.boolean,
 };

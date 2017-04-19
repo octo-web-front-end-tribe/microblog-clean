@@ -6,11 +6,24 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import Login from './Login';
 
+const props = {
+  onAuthenticateAction: () => {},
+  onUpdateLoginAction: () => {},
+  updateLocalStorageAction: () => {},
+};
+
 describe('Login component', () => {
-  const props = {
-    onAuthenticateAction: sinon.spy(),
-    onUpdateLoginAction: sinon.spy(),
-  };
+  const sandbox = sinon.sandbox.create();
+
+  beforeEach(() => {
+    sandbox.spy(props, 'onAuthenticateAction');
+    sandbox.spy(props, 'onUpdateLoginAction');
+    sandbox.spy(props, 'updateLocalStorageAction');
+  });
+
+  afterEach(() => {
+    sandbox.restore();
+  });
 
   describe('on render', () => {
     it('should render an input', () => {
@@ -42,10 +55,6 @@ describe('Login component', () => {
 
   describe('on key press', () => {
     describe('with a key different than enter', () => {
-      beforeEach(() => {
-        window.localStorage.clear();
-      });
-
       it('should do nothing', () => {
         // given
         const input = shallow(<Login {...props} />).find('input');
@@ -54,7 +63,8 @@ describe('Login component', () => {
         input.simulate('keyPress', { keyCode: 'notEnter' });
 
         // then
-        expect(window.localStorage.length).to.equal(0);
+        expect(props.onAuthenticateAction).to.have.not.been.calledOnce;
+        expect(props.onUpdateLoginAction).to.have.not.been.calledOnce;
       });
     });
 
@@ -82,7 +92,7 @@ describe('Login component', () => {
         input.simulate('keyPress', { key: 'Enter' });
 
         // then
-        expect(window.localStorage.getItem('name')).to.equal('My name');
+        expect(props.updateLocalStorageAction).to.have.been.calledOnce;
       });
     });
   });
