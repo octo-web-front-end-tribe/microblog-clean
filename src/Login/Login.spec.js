@@ -1,4 +1,5 @@
 import React from 'react';
+import sinon from 'sinon';
 import { Redirect } from 'react-router';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
@@ -6,14 +7,18 @@ import Login from './Login';
 
 describe('Login component', () => {
   describe('on render', () => {
+    const props = {
+      onAuthenticateAction: sinon.spy(),
+    };
+
     it('should render an input', () => {
-      const wrapper = shallow(<Login />);
+      const wrapper = shallow(<Login {...props} />);
 
       expect(wrapper.find('input')).to.have.length(1);
     });
 
     it('When user is authenticated should redirect to /', () => {
-      const wrapper = shallow(<Login />);
+      const wrapper = shallow(<Login {...props} />);
       wrapper.setState({ isAuthenticated: true });
 
       expect(wrapper.find(Redirect)).to.have.length(1);
@@ -22,7 +27,7 @@ describe('Login component', () => {
     describe('on change', () => {
       it('should set state with input value', () => {
         // given
-        const wrapper = shallow(<Login />);
+        const wrapper = shallow(<Login {...props} />);
         const input = wrapper.find('input');
 
         // when
@@ -41,7 +46,7 @@ describe('Login component', () => {
 
         it('should do nothing', () => {
           // given
-          const input = shallow(<Login />).find('input');
+          const input = shallow(<Login {...props} />).find('input');
 
           // when
           input.simulate('keyPress', { keyCode: 'notEnter' });
@@ -54,7 +59,7 @@ describe('Login component', () => {
       describe('with enter', () => {
         it('should save name inside local Storage with value', () => {
           // given
-          const wrapper = shallow(<Login />);
+          const wrapper = shallow(<Login {...props} />);
           wrapper.setState({ inputValue: 'My name' });
           const input = wrapper.find('input');
 

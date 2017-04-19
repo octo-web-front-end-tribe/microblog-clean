@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Redirect } from 'react-router';
 import { container } from './Login.css';
 
@@ -10,6 +11,7 @@ class Login extends Component {
 
   onEnter({ key }) {
     if (key === 'Enter') {
+      this.props.onAuthenticateAction(this.state.inputValue);
       window.localStorage.setItem('name', this.state.inputValue);
       this.setState({ inputValue: '', isAuthenticated: true });
     }
@@ -34,5 +36,9 @@ class Login extends Component {
     return (<Redirect to="/" />);
   }
 }
+
+Login.propTypes = {
+  onAuthenticateAction: PropTypes.func.isRequired,
+};
 
 export default Login;
