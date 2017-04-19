@@ -72,6 +72,19 @@ describe('Login component', () => {
         // then
         expect(props.onAuthenticateAction).to.have.been.calledOnce;
       });
+
+      it('should save name inside local Storage with value', () => {
+        // given
+        const wrapper = shallow(<Login {...props} login="My name" />);
+        wrapper.setState({ inputValue: 'My name' });
+        const input = wrapper.find('input');
+
+        // when
+        input.simulate('keyPress', { key: 'Enter' });
+
+        // then
+        expect(window.localStorage.getItem('name')).to.equal('My name');
+      });
     });
   });
 });

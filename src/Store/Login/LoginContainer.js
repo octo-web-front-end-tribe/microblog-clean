@@ -8,4 +8,10 @@ export const mapDispatchToProps = {
   onUpdateLoginAction: updateLogin,
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+export function mapStateToProps(state) {
+  return {
+    login: state.login,
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
