@@ -4,16 +4,10 @@ import { Redirect } from 'react-router';
 import { container } from './Login.css';
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { isAuthenticated: false };
-  }
-
   onEnter({ key }) {
     if (key === 'Enter') {
       this.props.onAuthenticateAction(this.props.login);
       window.localStorage.setItem('name', this.props.login);
-      this.setState({ isAuthenticated: true });
     }
   }
 
@@ -22,7 +16,7 @@ class Login extends Component {
   }
 
   render() {
-    if (!this.state.isAuthenticated) {
+    if (!this.props.isAuthenticated) {
       return (
         <div className={container}>
           <input
@@ -41,10 +35,12 @@ Login.propTypes = {
   onAuthenticateAction: PropTypes.func.isRequired,
   onUpdateLoginAction: PropTypes.func.isRequired,
   login: PropTypes.string,
+  isAuthenticated: PropTypes.boolean,
 };
 
 Login.defaultProps = {
   login: '',
+  isAuthenticated: false,
 };
 
 export default Login;

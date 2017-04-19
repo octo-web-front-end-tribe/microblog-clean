@@ -20,8 +20,7 @@ describe('Login component', () => {
     });
 
     it('When user is authenticated should redirect to /', () => {
-      const wrapper = shallow(<Login {...props} />);
-      wrapper.setState({ isAuthenticated: true });
+      const wrapper = shallow(<Login {...props} isAuthenticated />);
 
       expect(wrapper.find(Redirect)).to.have.length(1);
     });
