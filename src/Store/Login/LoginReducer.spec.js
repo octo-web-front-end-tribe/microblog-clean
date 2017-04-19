@@ -34,6 +34,7 @@ describe('LoginReducer', () => {
       const loginAction = authenticate('testLogin');
       const state = loginReducer(currentState, loginAction);
       expect(state).to.have.property('login').that.equals('testLogin');
+      expect(state).to.have.property('isAuthenticated').that.equals(true);
     });
   });
 
