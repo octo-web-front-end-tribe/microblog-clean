@@ -16,7 +16,6 @@ class InputMessage extends Component {
         content: this.state.inputValue,
       })
         .then(() => {
-          this.props.onSubmit();
           this.setState({ inputValue: '' });
         });
     }
@@ -39,13 +38,5 @@ class InputMessage extends Component {
     );
   }
 }
-
-InputMessage.propTypes = {
-  onSubmit: PropTypes.function,
-};
-
-InputMessage.defaultProps = {
-  onSubmit: () => {},
-};
 
 export default InputMessage;

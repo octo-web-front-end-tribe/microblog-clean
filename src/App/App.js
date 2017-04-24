@@ -16,18 +16,13 @@ class App extends Component {
   }
 
   refresh() {
-    return fetchMessages()
-      .then((messages) => {
-        this.setState({ messages });
-        return messages;
-      });
   }
 
   render() {
     return (
       <div className={container}>
         <div className={messageBox}>
-          <InputMessage onSubmit={() => this.refresh()} />
+          <InputMessage />
           <MessageList messages={this.state.messages} />
         </div>
       </div>
