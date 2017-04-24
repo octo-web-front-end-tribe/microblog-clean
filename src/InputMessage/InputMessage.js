@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { postMessage } from '../ApiHelper/ApiHelper';
 import { container, input } from './InputMessage.css';
 
 class InputMessage extends Component {
