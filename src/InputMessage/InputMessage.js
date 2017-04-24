@@ -10,16 +10,11 @@ class InputMessage extends Component {
 
   onEnter({ key }) {
     if (key === 'Enter') {
-      postMessage({
-        author: 'John Smith',
-        content: this.state.inputValue,
-      });
-      this.setState({ inputValue: '' });
     }
   }
 
   onChange({ target: { value } }) {
-    this.setState({ inputValue: value });
+
   }
 
   render() {
@@ -28,8 +23,8 @@ class InputMessage extends Component {
         <input
           className={input}
           value={this.state.inputValue}
-          onChange={event => this.onChange(event)}
-          onKeyPress={event => this.onEnter(event)}
+          onChange={event => ()}
+          onKeyPress={event => ()}
         />
       </div>
     );
