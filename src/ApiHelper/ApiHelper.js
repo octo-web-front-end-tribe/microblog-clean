@@ -7,6 +7,9 @@ export function fetchMessages() {
 export function postMessage(body) {
   return fetch('https://skool-microblog.herokuapp.com/messages', {
     method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
     body: JSON.stringify(body),
   });
 }

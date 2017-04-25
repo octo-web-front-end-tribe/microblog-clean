@@ -48,7 +48,13 @@ describe('ApiHelper component', () => {
             expect(fetchMock).route(getMessageRoute).to.have.been.called.with.args(
               [
                 getMessageRoute,
-                { body: JSON.stringify(body), method: 'POST' },
+                { 
+                  body: JSON.stringify(body),
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  method: 'POST'
+                },
               ]);
           });
       });
