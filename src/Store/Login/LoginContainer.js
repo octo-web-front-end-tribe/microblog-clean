@@ -13,10 +13,10 @@ export const mapDispatchToProps = {
   updateLocalStorageAction: updateLocalStorage,
 };
 
-export function mapStateToProps(state) {
+export function mapStateToProps({ auth }) {
   return {
-    login: state.login,
-    isAuthenticated: !!state.isAuthenticated,
+    login: auth.login,
+    isAuthenticated: !!auth.isAuthenticated,
   };
 }
 

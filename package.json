@@ -12,7 +12,7 @@
     "clean": "rimraf public && mkdir public",
     "build": "npm run clean && webpack -p",
     "start": "webpack-dev-server --progress --inline --hot --quiet --colors --open",
-    "lint": "eslint src/**/*.js",
+    "lint": "eslint --fix --ext .js,.jsx ./src",
     "mocha": "mocha --reporter spec --compilers js:babel-register -r ignore-styles -r jsdom-global/register -r mock-local-storage --recursive 'src/**/*.spec.js'",
     "test": "npm run lint & npm run mocha",
     "test-watch": "npm run mocha -- --watch"
@@ -47,6 +47,7 @@
     "react-router-dom": "^4.1.1",
     "react-test-renderer": "^15.5.4",
     "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
     "rimraf": "2.6.1",
     "sinon": "2.1.0",
     "style-loader": "0.16.1",

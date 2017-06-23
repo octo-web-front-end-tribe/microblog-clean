@@ -55,7 +55,8 @@ describe('InputMessage component', () => {
     describe('with enter', () => {
       it('should call ApiHelper.postMessage with value', () => {
         // given
-        const wrapper = shallow(<InputMessage />);
+        const onSubmit = sinon.spy();
+        const wrapper = shallow(<InputMessage onSubmit={onSubmit} />);
         wrapper.setState({ inputValue: 'My new message' });
         window.localStorage.setItem('name', 'John');
 
@@ -65,12 +66,11 @@ describe('InputMessage component', () => {
         input.simulate('keyPress', { key: 'Enter' });
 
         // then
-        expect(spyApiHelperPostMessage.callCount).to.equal(1);
-        /* eslint no-unused-expressions : 0 */
-        expect(spyApiHelperPostMessage.calledWith({ author: 'John', content: 'My new message' })).to.be.true;
+        expect(onSubmit).to.have.been.calledOnce;
+        expect(onSubmit.args[0]).to.deep.equal(['John', 'My new message']);
       });
 
-      it('should invoke prop onEnter', (done) => {
+      it('should invoke prop onEnter', () => {
         // given
         const onSubmitStub = sinon.stub();
         const wrapper = shallow(<InputMessage onSubmit={onSubmitStub} />);
@@ -81,11 +81,8 @@ describe('InputMessage component', () => {
         input.simulate('keyPress', { key: 'Enter' });
 
         // then
-        setTimeout(() => {
-          expect(onSubmitStub.callCount).to.equal(1);
-          expect(wrapper.state('inputValue')).to.equal('');
-          done();
-        }, 10);
+        expect(onSubmitStub.callCount).to.equal(1);
+        expect(wrapper.state('inputValue')).to.equal('');
       });
     });
   });

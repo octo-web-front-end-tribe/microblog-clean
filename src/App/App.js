@@ -1,38 +1,39 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import InputMessage from '../InputMessage/InputMessage';
 import MessageList from '../MessageList/MessageList';
 import { container, messageBox } from './App.css';
-import { fetchMessages } from '../ApiHelper/ApiHelper';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { messages: [] };
-  }
-
-  componentWillMount() {
+  componentDidMount() {
     return this.refresh();
   }
 
   refresh() {
-    return fetchMessages()
-      .then((messages) => {
-        this.setState({ messages });
-        return messages;
-      });
+    this.props.loadMessages();
   }
 
   render() {
     return (
       <div className={container}>
         <div className={messageBox}>
-          <InputMessage onSubmit={() => this.refresh()} />
-          <MessageList messages={this.state.messages} />
+          <InputMessage onSubmit={this.props.saveMessage} />
+          <MessageList messages={this.props.messages} />
         </div>
       </div>
     );
   }
 }
+
+App.propTypes = {
+  loadMessages: PropTypes.func.isRequired,
+  saveMessage: PropTypes.func.isRequired,
+  messages: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    author: PropTypes.string,
+    content: PropTypes.string,
+  })).isRequired,
+};
 
 export default App;

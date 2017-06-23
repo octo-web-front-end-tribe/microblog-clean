@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { postMessage } from '../ApiHelper/ApiHelper';
 import { container, input } from './InputMessage.css';
 
 class InputMessage extends Component {
@@ -11,14 +10,8 @@ class InputMessage extends Component {
 
   onEnter({ key }) {
     if (key === 'Enter') {
-      postMessage({
-        author: window.localStorage.getItem('name'),
-        content: this.state.inputValue,
-      })
-        .then(() => {
-          this.props.onSubmit();
-          this.setState({ inputValue: '' });
-        });
+      this.props.onSubmit(window.localStorage.getItem('name'), this.state.inputValue);
+      this.setState({ inputValue: '' });
     }
   }
 
@@ -41,7 +34,7 @@ class InputMessage extends Component {
 }
 
 InputMessage.propTypes = {
-  onSubmit: PropTypes.function,
+  onSubmit: PropTypes.func,
 };
 
 InputMessage.defaultProps = {
